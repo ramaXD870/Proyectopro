@@ -1,0 +1,111 @@
+/* Estilos Generales */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f400;
+}
+
+/* Tabla - Ahora negra */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1a1a1a; /* Negro oscuro */
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #444; /* Borde gris oscuro */
+}
+
+/* Encabezado - Negro */
+.table th {
+    background-color: #000000; /* Negro puro */
+    color: white;
+}
+
+/* Celdas - Gris oscuro */
+.table td {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+/* Contador */
+.contador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.contador button {
+    cursor: pointer;
+    padding: 5px 10px;
+    font-weight: bold;
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+}
+
+.contador button:hover {
+    background-color: #555;
+}
+
+.contador span {
+    font-weight: bold;
+    min-width: 20px;
+    display: inline-block;
+    color: white;
+}
+
+/* Botón eliminar (la X) */
+.eliminar {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.eliminar:hover {
+    background-color: #cc0000;
+}
+
+/* Botones de abajo */
+.botones {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.botones button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+}
+
+/* Comprar - Verde */
+.comprar {
+    background-color: #28a79c;
+}
+
+/* Borrar - Amarillo */
+.borrar {
+    background-color: #ff0707;
+    color: black;
+}
+
+/* Agregar - Azul */
+.agregar {
+    background-color: #007bff;
+}
+
+/* Hover para todos los botones */
+.botones button:hover {
+    opacity: 0.8;
+}

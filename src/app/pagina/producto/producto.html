@@ -1,0 +1,63 @@
+<!-- 🏷️ HEADER -->
+<section class="productos-header">
+  <div class="header-content">
+    <h1>🛒 Tienda Pokémon</h1>
+    <p>¡{{Productos.length}} productos disponibles!</p>
+  </div>
+</section>
+
+<!-- 🎴 GRID -->
+<section class="productos-container">
+  <div class="grid-container">
+    
+    <!-- ← TU CÓDIGO MEJORADO con TODOS los campos -->
+    @for (p of Productos; track p.id) {
+      @if (p.disponibilidad) {
+        <div class="pokemon-card">
+          
+          <!-- 🖼️ IMAGEN + CATEGORÍA -->
+          <div class="card-imagen">
+            <img [src]="p.imagen" [alt]="p.nombre" class="card-img-top">
+            
+            <!-- 🏷️ CATEGORÍA -->
+            <span class="categoria-tag">{{p.categoria}}</span>
+            
+            <!-- ❤️ FAVORITO -->
+            <button class="btn-favorito" type="button">
+              <i class="far fa-heart"></i>
+            </button>
+          </div>
+          
+          <!-- 📝 INFO COMPLETA -->
+          <div class="card-body">
+            <!-- 📛 NOMBRE -->
+            <h5 class="card-title">{{p.nombre}}</h5>
+            
+            <!-- 📄 DESCRIPCIÓN -->
+            <p class="card-descripcion">{{p.descripcion}}</p>
+            
+            <!-- 💰 PRECIO -->
+            <div class="precio-container">
+              <span class="precio-actual">${{p.precio}}</span>
+              <span class="precio-descuento">Antes: $65.99</span>
+            </div>
+            
+            <!-- 📦 STOCK -->
+            <div class="stock-info">
+              <span class="stock-label">Stock:</span>
+              <span class="stock-number" [class.bajo-stock]="p.stock < 5">
+                {{p.stock}}
+              </span>
+              <span class="stock-units">unidades</span>
+            </div>
+            
+            <!-- 🛒 BOTÓN -->
+            <button class="btn-comprar" type="button">
+              🛒 Añadir al carrito
+            </button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</section>

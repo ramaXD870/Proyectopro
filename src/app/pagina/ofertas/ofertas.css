@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Fondo oscuro con degradado sutil */
+    background: linear-gradient(135deg, #0f0c29 0%, #1a1a2e 50%, #0f0c29 100%);
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.offers-section {
+    padding: 60px 0;
+    /* Fondo oscuro更深 para la sección */
+    background: linear-gradient(135deg, #0a0a0f 0%, #16161e 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Patrón de ruido/grain más sutil para el fondo oscuro */
+.offers-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+    /* Color blanco hueso suave */
+    color: #e2e8f0;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    font-weight: 700;
+}
+
+.section-title span {
+    /* Gradiente de acentos fríos (azul-morado-cian) para modo oscuro */
+    background: linear-gradient(45deg, #38bdf8, #818cf8, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0%, 100% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(360deg); }
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.3rem;
+    /* Gris claro para subtítulo */
+    color: #94a3b8;
+    margin-bottom: 50px;
+    font-weight: 300;
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.pokemon-card {
+    /* Fondo de tarjeta oscuro (no transparente blanco) */
+    background: linear-gradient(145deg, #1e1e2e 0%, #16161f 100%);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Borde sutil oscuro */
+    border: 1px solid #2d2d3a;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Línea decorativa superior con color frío */
+.pokemon-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+}
+
+.pokemon-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    /* Borde brilla en hover */
+    border-color: #38bdf8;
+    background: linear-gradient(145deg, #252535 0%, #1c1c28 100%);
+}
+
+.card-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    /* Borde sutil en imagen */
+    border: 1px solid #2d2d3a;
+}
+
+.pokemon-card:hover .card-image {
+    transform: scale(1.05);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    /* Blanco suave */
+    color: #f1f5f9;
+    margin-bottom: 10px;
+}
+
+.card-edition {
+    /* Gris claro para texto secundario */
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.price-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.original-price {
+    font-size: 1.1rem;
+    color: #64748b;
+    text-decoration: line-through;
+}
+
+.current-price {
+    font-size: 2rem;
+    font-weight: 800;
+    /* Color de precio en Cyan/Azuf */
+    background: linear-gradient(45deg, #38bdf8, #67e8f9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.discount-badge {
+    /* Badge más oscuro y elegante */
+    background: linear-gradient(45deg, #4f46e5, #6366f1);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+}
+
+.cta-button {
+    width: 100%;
+    padding: 16px;
+    /* Botón en morado/azul frío (en lugar de verde) */
+    background: linear-gradient(45deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.6);
+}
+
+@media (max-width: 768px) {
+    .offers-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .pokemon-card {
+        padding: 25px;
+    }
+}

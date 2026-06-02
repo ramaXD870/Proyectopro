@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Colección Pokémon</title>
+    <link rel="stylesheet" href="registro.css">
+</head>
+<body>
+    <div class="container">
+        <div class="pokemon-decoration"></div>
+        
+        <h1 class="title">🎮 ¡Únete a la Liga Pokémon!</h1>
+        <p class="subtitle">Regístrate para coleccionar tus cartas favoritas</p>
+
+        <form id="registerForm" action="#" method="POST">
+            <div class="form-group">
+                <label for="username">👤 Nombre de Entrenador</label>
+                <input type="text" id="username" name="username" placeholder="Ash Ketchum" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">✉️ Correo Electrónico</label>
+                <input type="email" id="email" name="email" placeholder="ash@pokemon.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">🔒 Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pokemon">⭐ Pokémon Favorito</label>
+                <input type="text" id="pokemon" name="pokemon" placeholder="Pikachu, Charizard..." required>
+            </div>
+
+            <button type="submit" class="register-btn">
+                🚀 ¡Capturar mi cuenta!
+            </button>
+
+            <div class="success-message">
+                <h3>¡Poké Ball capturada! 🎉</h3>
+                <p>Te has registrado exitosamente en la Liga Pokémon.<br>
+                ¡Prepárate para tu próxima batalla!</p>
+            </div>
+        </form>
+
+        <div class="pokemon-hint">
+            💡 Regístrate y comienza tu aventura Pokémon
+        </div>
+    </div>
+</body>
+</html>
