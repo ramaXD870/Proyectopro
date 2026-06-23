@@ -1,63 +1,75 @@
-<!-- 🏷️ HEADER -->
+<!-- HEADER: encabezado de la pagina de productos -->
 <section class="productos-header">
   <div class="header-content">
     <h1>🛒 Tienda Pokémon</h1>
+    <!-- Muestra la cantidad de productos usando el largo del arreglo Productos -->
     <p>¡{{Productos.length}} productos disponibles!</p>
   </div>
 </section>
 
-<!-- 🎴 GRID -->
+<!-- GRID: contenedor de todas las tarjetas de producto -->
 <section class="productos-container">
   <div class="grid-container">
-    
-    <!-- ← TU CÓDIGO MEJORADO con TODOS los campos -->
+
+    <!-- @for recorre el arreglo Productos y crea una tarjeta por cada uno -->
+    <!-- track p.id le dice a Angular que identifique cada elemento por su id (mejora el rendimiento) -->
     @for (p of Productos; track p.id) {
-      @if (p.disponibilidad) {
-        <div class="pokemon-card">
-          
-          <!-- 🖼️ IMAGEN + CATEGORÍA -->
-          <div class="card-imagen">
-            <img [src]="p.imagen" [alt]="p.nombre" class="card-img-top">
-            
-            <!-- 🏷️ CATEGORÍA -->
-            <span class="categoria-tag">{{p.categoria}}</span>
-            
-            <!-- ❤️ FAVORITO -->
-            <button class="btn-favorito" type="button">
-              <i class="far fa-heart"></i>
-            </button>
-          </div>
-          
-          <!-- 📝 INFO COMPLETA -->
-          <div class="card-body">
-            <!-- 📛 NOMBRE -->
-            <h5 class="card-title">{{p.nombre}}</h5>
-            
-            <!-- 📄 DESCRIPCIÓN -->
-            <p class="card-descripcion">{{p.descripcion}}</p>
-            
-            <!-- 💰 PRECIO -->
-            <div class="precio-container">
-              <span class="precio-actual">${{p.precio}}</span>
-              <span class="precio-descuento">Antes: $65.99</span>
-            </div>
-            
-            <!-- 📦 STOCK -->
-            <div class="stock-info">
-              <span class="stock-label">Stock:</span>
-              <span class="stock-number" [class.bajo-stock]="p.stock < 5">
-                {{p.stock}}
-              </span>
-              <span class="stock-units">unidades</span>
-            </div>
-            
-            <!-- 🛒 BOTÓN -->
-            <button class="btn-comprar" type="button">
-              🛒 Añadir al carrito
-            </button>
-          </div>
+    <!-- @if solo muestra la tarjeta si el producto tiene disponibilidad en true -->
+    @if (p.disponibilidad) {
+    <div class="pokemon-card">
+
+      <!-- IMAGEN + CATEGORIA -->
+      <div class="card-imagen">
+        <!-- [src] y [alt] son property binding: toman el valor desde el objeto p -->
+        <img [src]="p.imagen" [alt]="p.nombre" class="card-img-top">
+
+        <!-- Etiqueta que muestra la categoria del producto (Eléctrico, Fuego, etc) -->
+        <span class="categoria-tag">{{p.categoria}}</span>
+
+        <!-- Boton de favorito: al hacer click llama a agregarAFavoritos pasandole el producto actual -->
+        <button class="btn-favorito" type="button" (click)="agregarAFavoritos(p)">
+          ❤️
+        </button>
+      </div>
+
+      <!-- INFO COMPLETA DEL PRODUCTO -->
+      <div class="card-body">
+        <!-- NOMBRE del producto -->
+        <h5 class="card-title">{{p.nombre}}</h5>
+
+        <!-- DESCRIPCION del producto -->
+        <p class="card-descripcion">{{p.descripcion}}</p>
+
+        <!-- PRECIO actual y precio anterior (tachado/referencia) -->
+        <div class="precio-container">
+          <span class="precio-actual">${{p.precio}}</span>
+          <!-- Nota: este precio "Antes" esta fijo en $65.99 para todos los productos -->
+          <span class="precio-descuento">Antes: $65.99</span>
         </div>
-      }
+
+        <!-- STOCK disponible -->
+        <div class="stock-info">
+          <span class="stock-label">Stock:</span>
+          <!-- [class.bajo-stock] agrega la clase CSS "bajo-stock" solo si el stock es menor a 5 -->
+          <span class="stock-number" [class.bajo-stock]="p.stock < 5">
+            {{p.stock}}
+          </span>
+          <span class="stock-units">unidades</span>
+        </div>
+
+        <!--
+          Al hacer click enviamos el producto actual (p)
+          a la función agregarAlCarrito()
+        -->
+        <button class="btn-comprar" type="button" (click)="agregarAlCarrito(p)">
+          🛒 Añadir al carrito
+        </button>
+
+      </div>
+    </div>
+
+    }
+   
     }
   </div>
 </section>

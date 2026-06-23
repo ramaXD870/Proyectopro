@@ -1,91 +1,149 @@
+<!-- ========================= -->
+<!-- BARRA DE NAVEGACIÓN -->
+<!-- ========================= -->
 <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+
   <div class="container-fluid">
 
-    <li class="nav-item">
-      <a class="nav-link d-flex aling-item-center" routerLink="/inicio">
-        <img src="assets/arcade-svgrepo-com.svg" alt="logo" width="35" height="35" class="me-2">
-      </a>
-    </li>
+    <!-- LOGO DE LA TIENDA -->
+    <a class="navbar-brand" routerLink="/inicio">
+      <img
+        src="assets/arcade-svgrepo-com.svg"
+        alt="logo"
+        width="35"
+        height="35">
+    </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-      aria-controls="navbarColor02" aria-expanded="false" aria-label="Alternar navegación">
+    <!-- BOTÓN RESPONSIVE -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarColor02">
+
       <span class="navbar-toggler-icon"></span>
+
     </button>
-    <div class="collapse navbar-collapse" id="navbarColor02">
+
+    <div
+      class="collapse navbar-collapse"
+      id="navbarColor02">
+
+      <!-- MENÚ PRINCIPAL -->
       <ul class="navbar-nav me-auto">
+
+        <!-- INICIO -->
         <li class="nav-item">
-          <a class="nav-link active" href="#">
-            <font dir="auto" style="vertical-align: inherit;">
-              <font dir="auto" style="vertical-align: inherit;">Inicio
-              </font>
-            </font><span class="visually-hidden">
-              <font dir="auto" style="vertical-align: inherit;">
-                <font dir="auto" style="vertical-align: inherit;">(actual)</font>
-              </font>
-            </span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <font dir="auto" style="vertical-align: inherit;">
-              <font dir="auto" style="vertical-align: inherit;">Contactos</font>
-            </font>
+          <a
+            class="nav-link"
+            routerLink="/inicio">
+            Inicio
           </a>
         </li>
 
+        <!-- CONTACTO -->
         <li class="nav-item">
-          <a class="nav-link" routerLink="/ofertas">
-            <font dir="auto" style="vertical-align: inherit;">
-              <font dir="auto" style="vertical-align: inherit;">Ofertas</font>
-            </font>
+          <a
+            class="nav-link"
+            routerLink="/contacto">
+            Contacto
           </a>
         </li>
+
+        <!-- OFERTAS -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/ofertas">
+            Ofertas
+          </a>
+        </li>
+
+        <!-- MENÚ DESPLEGABLE -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">
-            <font dir="auto" style="vertical-align: inherit;">
-              <font dir="auto" style="vertical-align: inherit;">Menú desplegable</font>
-            </font>
-          </a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" routerLink="/carrito">
-              <font dir="auto" style="vertical-align: inherit;">
-                <font dir="auto" style="vertical-align: inherit;">Carrito</font>
-              </font>
-            </a>
-            <a class="dropdown-item" href="#">
-              <font dir="auto" style="vertical-align: inherit;">
-                <font dir="auto" style="vertical-align: inherit;">Favorito</font>
-              </font>
-            </a>
-            <a class="dropdown-item" routerLink="/productos">
-  Productos
-</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <font dir="auto" style="vertical-align: inherit;">
-                <font dir="auto" style="vertical-align: inherit;">Acerca de nosotros</font>
-              </font>
-            </a>
-          </div>
-        </li>
-      </ul>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/registro">
-          <button type="button" class="btn btn-outline-success">
-            Registro
-          </button>
-        </a>
-      </li>
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="search" placeholder="Buscar">
 
-        <button type="button" class="btn btn-outline-danger">
-          <font dir="auto" style="vertical-align: inherit;">
-            <font dir="auto" style="vertical-align: inherit;">Buscar</font>
-          </font>
+          <a
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#">
+
+            Tienda
+
+          </a>
+
+          <div class="dropdown-menu">
+
+            <!-- IR AL CARRITO -->
+            <a
+              class="dropdown-item"
+              routerLink="/carrito">
+
+              🛒 Carrito
+
+            </a>
+
+            <!-- IR A FAVORITOS -->
+            <a
+              class="dropdown-item"
+              routerLink="/favotiros">
+
+              ❤️ Favoritos
+
+            </a>
+
+            <!-- IR A PRODUCTOS -->
+            <a
+              class="dropdown-item"
+              routerLink="/productos">
+
+              📦 Productos
+
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+       
+          </div>
+
+        </li>
+
+      </ul>
+
+      <!-- BOTÓN REGISTRO -->
+      <a
+        class="nav-link"
+        routerLink="/registro">
+
+        <button
+          type="button"
+          class="btn btn-outline-success">
+
+          Registro
+
         </button>
+
+      </a>
+
+      <!-- BUSCADOR -->
+      <form class="d-flex">
+
+        <input
+          class="form-control me-sm-2"
+          type="search"
+          placeholder="Buscar producto">
+
+        <button
+          type="button"
+          class="btn btn-outline-danger">
+
+          Buscar
+
+        </button>
+
       </form>
+
     </div>
+
   </div>
+
 </nav>

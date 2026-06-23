@@ -1,1 +1,43 @@
-<p>contacto works!</p>
+<!-- Pagina de Contacto - tema Pokemon -->
+
+<!-- Div principal que contiene toda la pagina, le da el fondo y el borde -->
+<div class="contenedor">
+
+  <!-- Titulo principal de la pagina -->
+  <h1>Contacto</h1>
+
+  <!-- Texto chico debajo del titulo -->
+  <p class="subtitulo">¿Tenes alguna duda? Escribinos un mensaje</p>
+
+  <!-- Imagen de Pikachu como decoracion -->
+  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+       alt="Pikachu" class="imagen-pikachu">
+
+  <!-- Bloque con los datos de contacto, son fijos (no se editan) -->
+  <div class="info-contacto">
+    <p>📍 Pueblo Paleta, Región Kanto</p>
+    <p>✉️ contacto@centropokemon.com</p>
+    <p>📞 (011) 4555-1234</p>
+  </div>
+
+  <!-- Formulario para que el usuario envie un mensaje -->
+  <form class="formulario">
+
+    <!-- Campo para el nombre -->
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
+
+    <!-- Campo para el email -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Ingrese su email">
+
+    <!-- Campo para el mensaje, es un textarea porque puede ser mas largo -->
+    <label for="mensaje">Mensaje:</label>
+    <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escriba su mensaje"></textarea>
+
+    <!-- Boton para enviar el formulario -->
+    <button type="submit">Enviar</button>
+
+  </form>
+
+</div>

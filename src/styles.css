@@ -1,3 +1,33 @@
 
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'bootswatch/dist/darkly/bootstrap.min.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootswatch/dist/darkly/bootstrap.min.css';
+
+/* ========================= */
+/* CONFIGURACIÓN GENERAL */
+/* ========================= */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Angular ocupa toda la pantalla */
+app-root {
+
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+/* El contenido crece y empuja el footer hacia abajo */
+.contenido {
+
+  flex: 1;
+
+  padding: 20px;
+}

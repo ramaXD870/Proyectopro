@@ -1,0 +1,80 @@
+
+.contenedor {
+  max-width: 500px;
+  margin: 40px auto;       /* lo centra en la pantalla */
+  background-color: #fa8181;
+  border: 3px solid #000000;
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Color y separacion del titulo */
+h1 {
+  color: #cc0000;
+  margin-bottom: 5px;
+}
+
+/* Texto chico debajo del titulo */
+.subtitulo {
+  color: #000000;
+  margin-bottom: 15px;
+}
+
+/* Tamaño de la imagen de Pikachu */
+.imagen-pikachu {
+  width: 100px;
+  margin-bottom: 15px;
+}
+
+/* Bloque de datos de contacto: lo alinea a la izquierda y le da espacio abajo */
+.info-contacto {
+  margin-bottom: 20px;
+  text-align: left;
+  display: inline-block;   
+}
+
+.info-contacto p {
+  margin: 5px 0;
+}
+
+/* Formulario: pone los campos uno abajo del otro */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+/* Estilo de las etiquetas (Nombre, Email, Mensaje) */
+.formulario label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Estilo de los campos de texto */
+.formulario input,
+.formulario textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: inherit;
+}
+
+/* Estilo del boton de enviar */
+.formulario button {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Cambia el color del boton cuando se pasa el mouse por encima */
+.formulario button:hover {
+  background-color: #a30000;
+}

@@ -1,13 +1,59 @@
 import { Component } from '@angular/core';
-import { producto } from '../../model/producto';
+import { producto } from '../../model/producto'; // Interfaz/tipo que define la forma de un producto
+import { Carrito } from '../../servicios/carrito'; // Servicio que maneja el carrito de compras
+import { Favoritos } from '../../servicios/favoritos'; // Servicio que maneja la lista de favoritos
 
 @Component({
   selector: 'app-producto',
   imports: [],
-  templateUrl: './producto.html',
-  styleUrl: './producto.css',
+  templateUrl: './producto.html', // HTML asociado a este componente
+  styleUrl: './producto.css', // CSS asociado a este componente
 })
 export class Producto {
+
+  // Constructor: Angular inyecta automaticamente las instancias de Carrito y Favoritos
+  constructor(
+    private carrito: Carrito,
+    private favoritos: Favoritos
+  ) { }
+
+  // Agrega un producto al carrito
+  agregarAlCarrito(
+    productoSeleccionado: producto
+  ) {
+
+    // Llama al servicio Carrito para guardar el producto seleccionado
+    this.carrito.agregarProducto(
+      productoSeleccionado
+    );
+
+    // Muestra un mensaje emergente confirmando que se agrego
+    alert(
+      productoSeleccionado.nombre +
+      " agregado al carrito"
+    );
+  }
+
+  // ==========================
+  // Agregar a favoritos
+  // ==========================
+  agregarAFavoritos(
+    productoSeleccionado: producto
+  ) {
+
+    // Llama al servicio Favoritos para guardar el producto seleccionado
+    this.favoritos.agregarFavorito(
+      productoSeleccionado
+    );
+
+    // Muestra un mensaje emergente confirmando que se agrego a favoritos
+    alert(
+      productoSeleccionado.nombre +
+      " agregado a favoritos ❤️"
+    );
+  }
+
+
   Productos: producto[] = [
     {
       id: 1,
@@ -25,7 +71,7 @@ export class Producto {
       categoria: 'Fuego',
       imagen: 'assets/chari.webp',
       descripcion: 'Charizard EX Ultra Raro - Poder Supremo',
-      precio: 89.99 ,
+      precio: 89.99,
       stock: 8,
       disponibilidad: true
     },
@@ -60,6 +106,8 @@ export class Producto {
       disponibilidad: true
     },
     {
+      // Nota: el id salta de 5 a 7 (no hay id 6), por eso en el HTML
+      // pueden verse menos productos de los que esperarias por la cantidad de ids
       id: 7,
       nombre: 'Sword & Shield',
       categoria: 'Booster',
@@ -112,5 +160,3 @@ export class Producto {
 
   ]
 }
-
-

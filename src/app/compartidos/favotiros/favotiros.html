@@ -1,1 +1,74 @@
-<p>favotiros works!</p>
+<div class="contenedor">
+
+  <h1>❤️ Mis Favoritos</h1>
+
+  <p class="contador">
+    Productos guardados: {{favoritos.length}}
+  </p>
+
+  @if(favoritos.length > 0){
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      @for(p of favoritos; track p.id){
+
+      <tr>
+
+        <td>{{p.id}}</td>
+
+        <td>{{p.nombre}}</td>
+
+        <td>${{p.precio}}</td>
+
+        <td>
+
+          <button
+            class="btn-eliminar"
+            (click)="eliminar(p.id)"
+          >
+            Eliminar
+          </button>
+
+        </td>
+
+      </tr>
+
+      }
+
+    </tbody>
+
+  </table>
+
+  <button
+    class="btn-vaciar"
+    (click)="vaciarFavoritos()"
+  >
+    Vaciar Favoritos
+  </button>
+
+  }
+
+  @else {
+
+  <div class="vacio">
+
+    <h3>No hay favoritos</h3>
+
+    <p>Agrega algunos productos ❤️</p>
+
+  </div>
+
+  }
+
+</div>

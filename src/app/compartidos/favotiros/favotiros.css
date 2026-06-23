@@ -1,0 +1,88 @@
+.contenedor {
+
+  width: 85%;
+  margin: 30px auto;
+
+  background: #000000;
+
+  padding: 20px;
+
+  border-radius: 10px;
+
+  border: 1px solid #ddd;
+}
+
+h1 {
+
+  text-align: center;
+  color: #e91e63;
+}
+
+.contador {
+
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+
+  background: #f8bbd0;
+
+  padding: 10px;
+}
+
+td {
+
+  padding: 10px;
+
+  text-align: center;
+
+  border-bottom: 1px solid #ddd;
+}
+
+.btn-eliminar {
+
+  background: crimson;
+
+  color: white;
+
+  border: none;
+
+  padding: 8px 12px;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.btn-vaciar {
+
+  margin-top: 20px;
+
+  background: #444;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 15px;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.vacio {
+
+  text-align: center;
+
+  padding: 30px;
+
+  color: gray;
+}

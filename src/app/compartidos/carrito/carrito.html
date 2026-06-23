@@ -1,116 +1,47 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Contador</title>
-    <!-- Pega aquí el CSS de arriba -->
-    <link rel="stylesheet" href="carrito.css">
-</head>
-<body>
+<tbody>
 
-    <!-- TABLA DE PRODUCTOS -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-            </tr>
-        </thead>
-        <tbody id="productos">
-            <tr>
-                <td>1</td>
-                <td>Producto ejemplo</td>
-                <td>$1000</td>
-                <td>
-                    <div class="contador">
-                        <button onclick="restar(this)">▼</button>
-                        <span>0</span>
-                        <button onclick="sumar(this)">▲</button>
-                        <button class="eliminar" onclick="eliminar(this)">X</button>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <!-- Recorremos los productos guardados en el carrito -->
+  @for (p of productos; track p.id) {
 
-    <!-- BOTONES DE ABAJO -->
-    <div class="botones">
-        <button class="comprar">Comprar</button>
-        <button class="borrar" onclick="borrarTodo()">Borrar productos</button>
-        <button class="agregar" onclick="agregarProducto()">Agregar producto</button>
-    </div>
+    <tr>
 
-    <script>
-        
-    // SUBIR CONTADOR
-    function sumar(boton) {
-        let cantidad = boton.parentElement.querySelector("span");
-        let numero = parseInt(cantidad.innerText);
-        cantidad.innerText = numero + 1;
-    }
+      <!-- ID del producto -->
+      <td>{{p.id}}</td>
 
-    // BAJAR CONTADOR
-    function restar(boton) {
-        let cantidad = boton.parentElement.querySelector("span");
-        let numero = parseInt(cantidad.innerText);
+      <!-- Nombre -->
+      <td>{{p.nombre}}</td>
 
-        if (numero > 0) {
-            cantidad.innerText = numero - 1;
-        }
-    }
+      <!-- Precio -->
+      <td>${{p.precio}}</td>
 
-    // ELIMINAR FILA
-    function eliminar(boton) {
-        boton.closest("tr").remove();
-        reindexar();
-    }
+      <!-- Cantidad -->
+      <td>
 
-    // AGREGAR PRODUCTO
-    function agregarProducto() {
-        let tabla = document.getElementById("productos");
+        <div class="contador">
 
-        let fila = tabla.insertRow();
+          <!-- Botón para disminuir -->
+          <button (click)="restar(p)">▼</button>
 
-        let numero = fila.insertCell(0);
-        let producto = fila.insertCell(1);
-        let precio = fila.insertCell(2);
-        let cantidad = fila.insertCell(3);
+          <!-- Cantidad actual -->
+          <span>{{p.cantidad || 1}}</span>
 
-        numero.innerText = tabla.rows.length;
-        producto.innerText = "Nuevo producto";
-        precio.innerText = "$0";
+          <!-- Botón para aumentar -->
+          <button (click)="sumar(p)">▲</button>
 
-        cantidad.innerHTML = `
-            <div class="contador">
-                <button onclick="restar(this)">▼</button>
-                <span>0</span>
-                <button onclick="sumar(this)">▲</button>
-                <button class="eliminar" onclick="eliminar(this)">X</button>
-            </div>
-        `;
-    }
+          <!-- Eliminar producto -->
+          <button
+            class="eliminar"
+            (click)="eliminarProducto(p.id)"
+          >
+            X
+          </button>
 
-    // BORRAR TODO
-    function borrarTodo() {
-        let cantidades = document.querySelectorAll(".contador span");
+        </div>
 
-        cantidades.forEach(function(item) {
-            item.innerText = 0;
-        });
-    }
+      </td>
 
-    // REINDEXAR
-    function reindexar() {
-        let tabla = document.getElementById("productos");
+    </tr>
 
-        for (let i = 0; i < tabla.rows.length; i++) {
-            tabla.rows[i].cells[0].innerText = i + 1;
-        }
-    }
+  }
 
-    </script>
-</body>
-</html>
+</tbody>

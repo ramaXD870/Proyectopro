@@ -1,41 +1,36 @@
-/* Carrusel más compacto */
+/* ===================== CARRUSEL ===================== */
+
+/* Carrusel mas compacto */
 #carouselExampleIndicators {
   max-width: 90%;
-  /* Un poco más angosto */
   max-height: 380px;
-  /* Más chico */
   margin: 20px auto;
-  /* Espacio arriba/abajo */
 }
 
-/* Contenedor interno más pequeño */
+/* Contenedor interno mas pequeño */
 .carousel-inner {
   height: 350px;
-  /* Altura fija más chica */
   border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-/* Cada slide - altura reducida */
+/* Cada slide */
 .carousel-item {
   height: 350px;
-  /* Más pequeño */
 }
 
-/* 🎯 LAS IMÁGENES - SIN ESTIRAR */
+/* Las imagenes del carrusel no se estiran ni se recortan */
 .carousel-item img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* ❌ NO RECORTA, muestra imagen completa */
   object-position: center;
   background-color: #f8f9fa;
-  /* Fondo claro si hay espacios vacíos */
   border-radius: 10px;
 }
 
-/* Indicadores */
+/* Indicadores (los puntitos de abajo) */
 .carousel-indicators {
   bottom: 10px;
 }
@@ -52,7 +47,7 @@
   background-color: #007bff;
 }
 
-/* Botones más discretos */
+/* Botones de flecha izquierda/derecha */
 .carousel-control-prev,
 .carousel-control-next {
   width: 4%;
@@ -68,7 +63,84 @@
   border-radius: 50%;
 }
 
-/* RESPONSIVE MEJORADO */
+
+/* ===================== HERO ===================== */
+
+/* Fondo del hero, gris oscuro liso */
+.bg-dark-gray {
+  background-color: #2c3e50;
+  color: white;
+}
+
+/* Caja de info dentro del hero (el cuadro "Que incluye") */
+.bg-info-box {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Boton "Ver Mas" del hero */
+.btn-outline-warning {
+  border-color: #ffc107 !important;
+  color: #ffc107 !important;
+}
+
+.btn-outline-warning:hover {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+/* Los circulos con el tilde verde */
+.badge {
+  min-width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+
+/* ===================== PRODUCTOS ===================== */
+
+/* Tarjetas de producto, sombra suave al pasar el mouse */
+.product-card {
+  transition: box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-container {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card-img-container img {
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Boton "Comprar" de cada producto */
+.btn-buy {
+  border-radius: 6px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+}
+
+.price-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+
+/* ===================== RESPONSIVE ===================== */
+
 @media (max-width: 768px) {
   #carouselExampleIndicators {
     max-width: 95%;
@@ -78,6 +150,14 @@
   .carousel-inner,
   .carousel-item {
     height: 280px;
+  }
+
+  .card-img-container {
+    height: 180px;
+  }
+
+  .product-card {
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -90,83 +170,5 @@
   .carousel-inner,
   .carousel-item {
     height: 240px;
-  }
-
-  /* ============== HERO GRIS OSCURO ============== */
-  .bg-dark-gray {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #1a252f 100%);
-    color: white;
-    position: relative;
-  }
-
-  .bg-dark-gray::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    pointer-events: none;
-  }
-
-  /* Vidrio oscuro para la info */
-  .bg-glass-dark {
-    background: rgba(255, 255, 255, 0.08) !important;
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Botones hero */
-  .btn-outline-warning {
-    border-color: #ffc107 !important;
-    color: #ffc107 !important;
-  }
-
-  .btn-outline-warning:hover {
-    background-color: #ffc107 !important;
-    color: #000 !important;
-    transform: translateY(-2px);
-  }
-
-  /* Badges más grandes */
-  .badge {
-    min-width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-  }
-
-  /* Botón comprar */
-  .btn-buy {
-    background: linear-gradient(45deg, #ff416c, #ff4b2b) !important;
-    border: none !important;
-    border-radius: 50px !important;
-    padding: 0.75rem 1.5rem !important;
-    font-weight: 600 !important;
-    font-size: 0.95rem !important;
-    min-width: 120px;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
-  }
-
-  .btn-buy:hover {
-    transform: translateY(-2px) scale(1.05) !important;
-    box-shadow: 0 8px 25px rgba(255, 65, 108, 0.5) !important;
-    color: white !important;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .product-card {
-      margin-bottom: 2rem;
-    }
-
-    .card-img-container {
-      height: 200px;
-    }
   }
 }
