@@ -35,22 +35,28 @@ export class Producto {
   }
 
   // ==========================
-  // Agregar a favoritos
+  // Alternar favorito (marcar / desmarcar)
   // ==========================
-  agregarAFavoritos(
+  toggleFavorito(
     productoSeleccionado: producto
   ) {
 
-    // Llama al servicio Favoritos para guardar el producto seleccionado
-    this.favoritos.agregarFavorito(
+    // El servicio agrega si no estaba, o elimina si ya estaba
+    const quedoMarcado = this.favoritos.toggleFavorito(
       productoSeleccionado
     );
 
-    // Muestra un mensaje emergente confirmando que se agrego a favoritos
-    alert(
-      productoSeleccionado.nombre +
-      " agregado a favoritos ❤️"
-    );
+    // Mensaje distinto segun el resultado
+    if (quedoMarcado) {
+      alert(productoSeleccionado.nombre + " agregado a favoritos ❤️");
+    } else {
+      alert(productoSeleccionado.nombre + " quitado de favoritos");
+    }
+  }
+
+  // Saber si un producto esta marcado como favorito (para el HTML)
+  esFavorito(id: number): boolean {
+    return this.favoritos.esFavorito(id);
   }
 
 

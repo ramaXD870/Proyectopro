@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { producto } from '../../model/producto';
 import { Favoritos } from '../../servicios/favoritos';
+import { Carrito } from '../../servicios/carrito';
 
 @Component({
   selector: 'app-favotiros',
@@ -14,7 +15,8 @@ export class FavotirosComponent {
   favoritos: producto[] = [];
 
   constructor(
-    private favoritosService: Favoritos
+    private favoritosService: Favoritos,
+    private carritoService: Carrito
   ) {}
 
   ngOnInit() {
@@ -42,5 +44,20 @@ export class FavotirosComponent {
 
     this.favoritos = [];
 
+  }
+
+  // ==========================
+  // Agregar un favorito al carrito
+  // ==========================
+  agregarAlCarrito(productoSeleccionado: producto) {
+
+    this.carritoService.agregarProducto(
+      productoSeleccionado
+    );
+
+    alert(
+      productoSeleccionado.nombre +
+      " agregado al carrito 🛒"
+    );
   }
 }

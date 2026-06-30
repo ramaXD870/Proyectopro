@@ -26,9 +26,14 @@
         <!-- Etiqueta que muestra la categoria del producto (Eléctrico, Fuego, etc) -->
         <span class="categoria-tag">{{p.categoria}}</span>
 
-        <!-- Boton de favorito: al hacer click llama a agregarAFavoritos pasandole el producto actual -->
-        <button class="btn-favorito" type="button" (click)="agregarAFavoritos(p)">
-          ❤️
+        <!-- Boton de favorito: alterna entre marcado/desmarcado -->
+        <!-- [class.activo] agrega la clase "activo" si el producto ya esta en favoritos -->
+        <button
+          class="btn-favorito"
+          [class.activo]="esFavorito(p.id)"
+          type="button"
+          (click)="toggleFavorito(p)">
+          {{ esFavorito(p.id) ? '❤️' : '🤍' }}
         </button>
       </div>
 

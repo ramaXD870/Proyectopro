@@ -37,6 +37,34 @@ export class Favoritos {
   }
 
   // ==================================
+  // READ
+  // Saber si un producto ya esta en favoritos
+  // ==================================
+  esFavorito(id: number): boolean {
+    return this.favoritos.some(p => p.id === id);
+  }
+
+  // ==================================
+  // TOGGLE
+  // Si esta en favoritos lo quita, si no esta lo agrega
+  // Devuelve true si quedo marcado, false si quedo desmarcado
+  // ==================================
+  toggleFavorito(productoToggle: producto): boolean {
+
+    const existe = this.favoritos.find(
+      p => p.id === productoToggle.id
+    );
+
+    if (existe) {
+      this.eliminarFavorito(productoToggle.id);
+      return false;
+    } else {
+      this.agregarFavorito(productoToggle);
+      return true;
+    }
+  }
+
+  // ==================================
   // UPDATE
   // Actualizar información de un favorito
   // ==================================

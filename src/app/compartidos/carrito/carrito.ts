@@ -57,4 +57,51 @@ eliminarProducto(id: number) {
     this.carritoService.obtenerProductos();
 }
 
+// ==========================
+// Subtotal de un producto (precio * cantidad)
+// ==========================
+subtotal(p: any): number {
+  return p.precio * (p.cantidad || 1);
+}
+
+// ==========================
+// Total general del carrito
+// ==========================
+total(): number {
+  return this.productos.reduce(
+    (acumulado, p: any) => acumulado + this.subtotal(p),
+    0
+  );
+}
+
+// ==========================
+// Vaciar todo el carrito
+// ==========================
+vaciarCarrito() {
+
+  this.carritoService.vaciarCarrito();
+
+  this.productos = [];
+}
+
+// ==========================
+// Comprar ya
+// ==========================
+comprarYa() {
+
+  if (this.productos.length === 0) {
+    alert('Tu carrito está vacío');
+    return;
+  }
+
+  alert(
+    '¡Compra realizada por un total de $' +
+    this.total().toFixed(2) +
+    '! 🎉'
+  );
+
+  this.carritoService.vaciarCarrito();
+  this.productos = [];
+}
+
 }

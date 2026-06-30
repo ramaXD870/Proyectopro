@@ -34,6 +34,13 @@
         <td>
 
           <button
+            class="btn-carrito"
+            (click)="agregarAlCarrito(p)"
+          >
+            🛒 Agregar al carrito
+          </button>
+
+          <button
             class="btn-eliminar"
             (click)="eliminar(p.id)"
           >

@@ -1,10 +1,21 @@
+<!-- ============================================
+     PIE DE PÁGINA (FOOTER)
+     Va al final de toda la página, debajo de todo el contenido
+============================================ -->
 <footer class="black-footer">
   <div class="footer-content">
-    
+
     <!-- 📱 REDES SOCIALES -->
+    <!-- Esta sección muestra los íconos que llevan a las redes sociales -->
     <div class="social-section">
       <h3>📱 SÍGUENOS</h3>
       <div class="social-icons">
+
+        <!-- 
+          Cada <a> es un link que abre la red social.
+          target="_blank" hace que se abra en una pestaña nueva,
+          para que el usuario no pierda tu página al hacer click.
+        -->
         <a href="https://instagram.com/tucuenta" target="_blank" class="icon instagram">
           <img src="assets/instagram-color-svgrepo-com.svg" alt="Instagram" width="25" height="25">
           <i class="fab fa-instagram"></i>
@@ -14,23 +25,28 @@
           <i class="fab fa-tiktok"></i>
         </a>
         <a href="https://facebook.com/tucuenta" target="_blank" class="icon facebook">
-          <img src="assets/facebook-f-svgrepo-com.svg" alt="Facebook" width="25" height="25">
+          <img src="assets/facebook-color-svgrepo-com.svg" alt="Facebook" width="25" height="25">
           <i class="fab fa-facebook-f"></i>
         </a>
         <a href="https://twitter.com/tucuenta" target="_blank" class="icon twitter">
+          <img src="assets/social-twitter-svgrepo-com.svg" alt="Twitter" width="25" height="25">
           <i class="fab fa-twitter"></i>
         </a>
-         
         <a href="https://youtube.com/tucanal" target="_blank" class="icon youtube">
+          <img src="assets/youtube-color-svgrepo-com.svg" alt="YouTube" width="25" height="25">
           <i class="fab fa-youtube"></i>
         </a>
         <a href="https://discord.gg/tuservidor" target="_blank" class="icon discord">
+          <img src="assets/logo-discord-svgrepo-com.svg" alt="Discord" width="25" height="25">
           <i class="fab fa-discord"></i>
         </a>
+
       </div>
     </div>
 
     <!-- 🏷️ CATEGORÍAS POKÉMON -->
+    <!-- Links internos de la página, usan routerLink porque van
+         a otras secciones de tu misma aplicación Angular -->
     <div class="categories-section">
       <h3>🎮 CATEGORÍAS</h3>
       <div class="categories-list">
@@ -53,6 +69,7 @@
     </div>
 
     <!-- ℹ️ INFO ADICIONAL -->
+    <!-- Links legales/informativos y el texto de derechos de autor -->
     <div class="info-section">
       <h3>ℹ️ INFO</h3>
       <div class="info-links">

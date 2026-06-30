@@ -11,8 +11,8 @@
       <!-- Nombre -->
       <td>{{p.nombre}}</td>
 
-      <!-- Precio -->
-      <td>${{p.precio}}</td>
+      <!-- Precio (subtotal: precio x cantidad) -->
+      <td>${{subtotal(p).toFixed(2)}}</td>
 
       <!-- Cantidad -->
       <td>
@@ -45,3 +45,34 @@
   }
 
 </tbody>
+
+<!-- TOTAL GENERAL del carrito -->
+@if (productos.length > 0) {
+<tfoot>
+  <tr class="fila-total">
+    <td colspan="2"><strong>Total</strong></td>
+    <td colspan="2"><strong>${{total().toFixed(2)}}</strong></td>
+  </tr>
+</tfoot>
+}
+
+<!-- ACCIONES del carrito -->
+@if (productos.length > 0) {
+<div class="acciones-carrito">
+
+  <button
+    class="btn-vaciar"
+    (click)="vaciarCarrito()"
+  >
+    Vaciar carrito
+  </button>
+
+  <button
+    class="btn-comprar-ya"
+    (click)="comprarYa()"
+  >
+    Comprar ya
+  </button>
+
+</div>
+}
