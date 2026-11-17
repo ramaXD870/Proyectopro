@@ -1,0 +1,31 @@
+<!-- ========================= -->
+<!-- OFERTAS Y PRODUCTOS DESTACADOS -->
+<!-- ========================= -->
+<div class="contenedor-ofertas">
+
+  <h1>🔥 Ofertas Pokémon</h1>
+  <p class="subtitulo">Los productos destacados de nuestra tienda al mejor precio.</p>
+
+  @if (aviso()) {
+    <div class="alert alert-info">{{ aviso() }}</div>
+  }
+
+  @if (cargando()) {
+    <p>Cargando ofertas...</p>
+  } @else {
+    <div class="cartas">
+      @for (p of destacados(); track p.id) {
+        <div class="carta">
+          <img [src]="urlImagen(p.imagen)" [alt]="p.nombre">
+          <h3>{{ p.nombre }}</h3>
+          <p>{{ p.descripcion }}</p>
+          <p class="precio">${{ p.precio.toFixed(2) }}</p>
+          <button type="button" (click)="agregarAlCarrito(p)">Agregar al carrito</button>
+        </div>
+      } @empty {
+        <p>Por ahora no hay productos destacados.</p>
+      }
+    </div>
+  }
+
+</div>

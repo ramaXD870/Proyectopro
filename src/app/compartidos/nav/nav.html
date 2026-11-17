@@ -1,0 +1,80 @@
+<!-- ========================= -->
+<!-- BARRA DE NAVEGACIÓN -->
+<!-- ========================= -->
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+
+    <!-- Logo -->
+    <a class="navbar-brand" routerLink="/inicio">
+      <img src="assets/arcade-svgrepo-com.svg" alt="logo" width="35" height="35">
+    </a>
+
+    <!-- Botón responsive -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+
+      <!-- Menú principal -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/inicio" routerLinkActive="active">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/productos" routerLinkActive="active">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/ofertas" routerLinkActive="active">Ofertas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
+        </li>
+
+        <!-- Solo para usuarios con sesión -->
+        @if (auth.estaLogueado()) {
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">Mi cuenta</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" routerLink="/favoritos">❤️ Favoritos</a>
+              <a class="dropdown-item" routerLink="/compras">🧾 Mis compras</a>
+            </div>
+          </li>
+        }
+
+        <!-- Solo para el rol admin -->
+        @if (auth.esAdmin()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin" routerLinkActive="active">⚙️ Admin</a>
+          </li>
+        }
+      </ul>
+
+      <!-- Buscador -->
+      <form class="d-flex me-3" (submit)="$event.preventDefault(); buscar(texto.value)">
+        <input #texto class="form-control me-sm-2" type="search" placeholder="Buscar producto">
+        <button type="submit" class="btn btn-outline-danger">Buscar</button>
+      </form>
+
+      <!-- Carrito (con cantidad) -->
+      @if (auth.estaLogueado()) {
+        <a class="btn btn-outline-light me-2 position-relative" routerLink="/carrito">
+          🛒
+          @if (carrito.cantidadTotal() > 0) {
+            <span class="badge rounded-pill bg-danger">{{ carrito.cantidadTotal() }}</span>
+          }
+        </a>
+      }
+
+      <!-- Sesión -->
+      @if (auth.estaLogueado()) {
+        <span class="navbar-text me-2">Hola, {{ auth.usuario()?.nombre }}</span>
+        <button type="button" class="btn btn-outline-light" (click)="salir()">Cerrar sesión</button>
+      } @else {
+        <a class="btn btn-outline-light me-2" routerLink="/inicio-sesion">Iniciar sesión</a>
+        <a class="btn btn-outline-success" routerLink="/registro">Registro</a>
+      }
+
+    </div>
+  </div>
+</nav>

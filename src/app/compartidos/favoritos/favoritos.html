@@ -1,0 +1,44 @@
+<div class="contenedor">
+
+  <h1>❤️ Mis Favoritos</h1>
+
+  @if (mensaje()) {
+    <div class="alert alert-info">{{ mensaje() }}</div>
+  }
+
+  @if (cargando()) {
+    <p>Cargando favoritos...</p>
+  } @else if (favoritos.favoritos().length === 0) {
+    <div class="alert alert-secondary">
+      Todavía no marcaste productos como favoritos. <a routerLink="/productos">Ver productos</a>
+    </div>
+  } @else {
+
+    <p class="contador">Productos guardados: {{ favoritos.favoritos().length }}</p>
+
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (f of favoritos.favoritos(); track f.id_producto) {
+          <tr>
+            <td><img [src]="urlImagen(f.imagen)" [alt]="f.nombre" width="50" height="50" class="rounded"></td>
+            <td>{{ f.nombre }}</td>
+            <td>${{ f.precio.toFixed(2) }}</td>
+            <td class="d-flex gap-2">
+              <button type="button" class="btn btn-sm btn-success" (click)="agregarAlCarrito(f)">🛒 Al carrito</button>
+              <button type="button" class="btn btn-sm btn-danger" (click)="quitar(f)">Quitar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+  }
+</div>

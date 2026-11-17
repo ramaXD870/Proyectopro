@@ -1,107 +1,59 @@
-import { Component, OnInit } from '@angular/core';
-import { producto } from '../../model/producto';
-import { Carrito as CarritoService } from '../../servicios/carrito';
+import { Component, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CarritoService } from '../../servicios/carrito.service';
+import { ItemCarrito } from '../../modelos/producto.model';
+import { urlImagen } from '../../config';
 
 @Component({
   selector: 'app-carrito',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css',
 })
-export class Carrito implements OnInit {
+export class Carrito {
+  protected carrito = inject(CarritoService);
+  protected readonly urlImagen = urlImagen;
 
-  // Array que recibirá los productos del servicio
-  productos: producto[] = [];
+  cargando = signal(true);
+  error = signal('');
 
-  // Inyectamos el servicio
-  constructor(private carritoService: CarritoService) {}
-
-  ngOnInit() {
-
-    // Cuando carga la página obtenemos los productos
-    this.productos = this.carritoService.obtenerProductos();
-
-  }
-// Aumenta cantidad
-sumar(p: any) {
-
-  p.cantidad++;
-
-  this.carritoService.actualizarCantidad(
-    p.id,
-    p.cantidad
-  );
-}
-// Disminuye cantidad
-restar(p: any) {
-
-  if (p.cantidad > 1) {
-
-    p.cantidad--;
-
-    this.carritoService.actualizarCantidad(
-      p.id,
-      p.cantidad
-    );
-
-  }
-}
-
-// Elimina un producto del carrito
-eliminarProducto(id: number) {
-
-  this.carritoService.eliminarProducto(id);
-
-  // Actualizamos la tabla
-  this.productos =
-    this.carritoService.obtenerProductos();
-}
-
-// ==========================
-// Subtotal de un producto (precio * cantidad)
-// ==========================
-subtotal(p: any): number {
-  return p.precio * (p.cantidad || 1);
-}
-
-// ==========================
-// Total general del carrito
-// ==========================
-total(): number {
-  return this.productos.reduce(
-    (acumulado, p: any) => acumulado + this.subtotal(p),
-    0
-  );
-}
-
-// ==========================
-// Vaciar todo el carrito
-// ==========================
-vaciarCarrito() {
-
-  this.carritoService.vaciarCarrito();
-
-  this.productos = [];
-}
-
-// ==========================
-// Comprar ya
-// ==========================
-comprarYa() {
-
-  if (this.productos.length === 0) {
-    alert('Tu carrito está vacío');
-    return;
+  constructor() {
+    this.carrito.cargar().subscribe({
+      next: () => this.cargando.set(false),
+      error: () => {
+        this.error.set('No se pudo cargar el carrito.');
+        this.cargando.set(false);
+      },
+    });
   }
 
-  alert(
-    '¡Compra realizada por un total de $' +
-    this.total().toFixed(2) +
-    '! 🎉'
-  );
+  subtotal(i: ItemCarrito): number {
+    return i.cantidad * i.precio_unitario;
+  }
 
-  this.carritoService.vaciarCarrito();
-  this.productos = [];
-}
+  sumar(i: ItemCarrito): void {
+    this.cambiarCantidad(i, i.cantidad + 1);
+  }
 
+  restar(i: ItemCarrito): void {
+    if (i.cantidad > 1) this.cambiarCantidad(i, i.cantidad - 1);
+  }
+
+  private cambiarCantidad(i: ItemCarrito, cantidad: number): void {
+    this.carrito.actualizar(i.id_producto, cantidad).subscribe({ error: (e) => this.fallo(e) });
+  }
+
+  eliminar(i: ItemCarrito): void {
+    this.carrito.eliminar(i.id_producto).subscribe({ error: (e) => this.fallo(e) });
+  }
+
+  vaciar(): void {
+    if (!confirm('¿Vaciar todo el carrito?')) return;
+    this.carrito.vaciar().subscribe({ error: (e) => this.fallo(e) });
+  }
+
+  private fallo(e: HttpErrorResponse): void {
+    this.error.set(e.error?.error ?? 'No se pudo actualizar el carrito.');
+  }
 }

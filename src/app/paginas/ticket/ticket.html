@@ -1,0 +1,52 @@
+<div class="container my-4">
+
+  @if (error()) {
+    <div class="alert alert-danger">{{ error() }}</div>
+  }
+
+  @if (cargando()) {
+    <p>Cargando ticket...</p>
+  } @else if (compra(); as c) {
+
+    <div class="alert alert-success">¡Gracias por tu compra!</div>
+
+    <h1>Compra #{{ c.id_compra }}</h1>
+    <p>Fecha: {{ iso(c.fecha) | date: 'dd/MM/yyyy HH:mm' }}</p>
+
+    <table class="table align-middle">
+      <thead>
+        <tr><th>Producto</th><th>Cant.</th><th class="text-end">Precio</th><th class="text-end">Subtotal</th></tr>
+      </thead>
+      <tbody>
+        @for (d of c.detalle; track d.id_detalle) {
+          <tr>
+            <td>{{ d.nombre }}</td>
+            <td>{{ d.cantidad }}</td>
+            <td class="text-end">${{ d.precio_unitario.toFixed(2) }}</td>
+            <td class="text-end">${{ d.subtotal.toFixed(2) }}</td>
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="text-end"><strong>Total</strong></td>
+          <td class="text-end"><strong>${{ c.total.toFixed(2) }}</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="d-flex gap-2 flex-wrap">
+      @if (ticket(); as t) {
+        <span class="align-self-center">Ticket <strong>{{ t.numero_ticket }}</strong></span>
+        <a class="btn btn-primary" [href]="urlPdf()" target="_blank" rel="noopener">Ver / descargar PDF</a>
+      } @else {
+        <button type="button" class="btn btn-primary" (click)="generar()" [disabled]="generando()">
+          {{ generando() ? 'Generando...' : 'Generar ticket PDF' }}
+        </button>
+      }
+      <a class="btn btn-outline-light" routerLink="/compras">Mis compras</a>
+      <a class="btn btn-outline-light" routerLink="/productos">Seguir comprando</a>
+    </div>
+
+  }
+</div>

@@ -1,0 +1,90 @@
+<!-- Encabezado -->
+<section class="productos-header">
+  <div class="header-content">
+    <h1>🛒 Tienda Pokémon</h1>
+    <p>¡{{ visibles().length }} productos disponibles!</p>
+  </div>
+</section>
+
+<!-- Aviso flotante -->
+@if (aviso()) {
+  <div class="alert alert-info text-center m-3">{{ aviso() }}</div>
+}
+
+<!-- Filtros -->
+<section class="container my-3">
+  <div class="row g-2 align-items-end">
+
+    <div class="col-12 col-md-4">
+      <label class="form-label" for="f-buscar">Buscar</label>
+      <input #texto id="f-buscar" class="form-control" type="search" placeholder="Nombre o descripción"
+        [value]="buscar()" (keyup.enter)="buscarTexto(texto.value)">
+    </div>
+
+    <div class="col-6 col-md-3">
+      <label class="form-label" for="f-precio">Precio máximo ($)</label>
+      <input #max id="f-precio" class="form-control" type="number" min="0" placeholder="Sin límite"
+        [value]="precioMax() ?? ''" (input)="cambiarPrecioMax(max.value)">
+    </div>
+
+    <div class="col-6 col-md-3">
+      <label class="form-label" for="f-orden">Ordenar por</label>
+      <select #ord id="f-orden" class="form-select" [value]="orden()" (change)="cambiarOrden(ord.value)">
+        <option value="nombre">Nombre</option>
+        <option value="precio-asc">Precio: menor a mayor</option>
+        <option value="precio-desc">Precio: mayor a menor</option>
+      </select>
+    </div>
+
+    <div class="col-12 col-md-2 d-flex gap-2">
+      <button class="btn btn-primary flex-fill" type="button" (click)="buscarTexto(texto.value)">Buscar</button>
+      <button class="btn btn-outline-light" type="button" (click)="limpiarFiltros()" title="Limpiar filtros">✕</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- Grilla de productos -->
+<section class="productos-container">
+
+  @if (cargando()) {
+    <p class="text-center">Cargando productos...</p>
+  } @else if (error()) {
+    <div class="alert alert-danger text-center">{{ error() }}</div>
+  } @else {
+    <div class="grid-container">
+
+      @for (p of visibles(); track p.id) {
+        <div class="pokemon-card">
+
+          <div class="card-imagen">
+            <img [src]="urlImagen(p.imagen)" [alt]="p.nombre" class="card-img-top">
+
+            <button class="btn-favorito" [class.activo]="esFavorito(p.id)" type="button"
+              [attr.aria-label]="esFavorito(p.id) ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+              (click)="toggleFavorito(p)">
+              {{ esFavorito(p.id) ? '❤️' : '🤍' }}
+            </button>
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title">{{ p.nombre }}</h5>
+            <p class="card-descripcion">{{ p.descripcion }}</p>
+
+            <div class="precio-container">
+              <span class="precio-actual">${{ p.precio.toFixed(2) }}</span>
+            </div>
+
+            <button class="btn-comprar" type="button" (click)="agregarAlCarrito(p)">
+              🛒 Añadir al carrito
+            </button>
+          </div>
+
+        </div>
+      } @empty {
+        <p class="text-center w-100">No hay productos que coincidan con la búsqueda.</p>
+      }
+
+    </div>
+  }
+</section>

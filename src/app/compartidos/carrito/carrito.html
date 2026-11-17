@@ -1,78 +1,65 @@
-<tbody>
+<div class="container my-4">
 
-  <!-- Recorremos los productos guardados en el carrito -->
-  @for (p of productos; track p.id) {
+  <h1>🛒 Mi carrito</h1>
 
-    <tr>
-
-      <!-- ID del producto -->
-      <td>{{p.id}}</td>
-
-      <!-- Nombre -->
-      <td>{{p.nombre}}</td>
-
-      <!-- Precio (subtotal: precio x cantidad) -->
-      <td>${{subtotal(p).toFixed(2)}}</td>
-
-      <!-- Cantidad -->
-      <td>
-
-        <div class="contador">
-
-          <!-- Botón para disminuir -->
-          <button (click)="restar(p)">▼</button>
-
-          <!-- Cantidad actual -->
-          <span>{{p.cantidad || 1}}</span>
-
-          <!-- Botón para aumentar -->
-          <button (click)="sumar(p)">▲</button>
-
-          <!-- Eliminar producto -->
-          <button
-            class="eliminar"
-            (click)="eliminarProducto(p.id)"
-          >
-            X
-          </button>
-
-        </div>
-
-      </td>
-
-    </tr>
-
+  @if (error()) {
+    <div class="alert alert-danger">{{ error() }}</div>
   }
 
-</tbody>
+  @if (cargando()) {
+    <p>Cargando carrito...</p>
+  } @else if (carrito.items().length === 0) {
+    <div class="alert alert-secondary">
+      Tu carrito está vacío. <a routerLink="/productos">Ir a la tienda</a>
+    </div>
+  } @else {
 
-<!-- TOTAL GENERAL del carrito -->
-@if (productos.length > 0) {
-<tfoot>
-  <tr class="fila-total">
-    <td colspan="2"><strong>Total</strong></td>
-    <td colspan="2"><strong>${{total().toFixed(2)}}</strong></td>
-  </tr>
-</tfoot>
-}
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (i of carrito.items(); track i.id_producto) {
+          <tr>
+            <td><img [src]="urlImagen(i.imagen)" [alt]="i.nombre" width="50" height="50" class="rounded"></td>
+            <td>{{ i.nombre }}</td>
+            <td>${{ i.precio_unitario.toFixed(2) }}</td>
+            <td>
+              <div class="contador">
+                <button type="button" class="btn btn-sm btn-outline-light" (click)="restar(i)"
+                  [disabled]="i.cantidad <= 1" aria-label="Restar">▼</button>
+                <span>{{ i.cantidad }}</span>
+                <button type="button" class="btn btn-sm btn-outline-light" (click)="sumar(i)"
+                  aria-label="Sumar">▲</button>
+              </div>
+            </td>
+            <td>${{ subtotal(i).toFixed(2) }}</td>
+            <td>
+              <button type="button" class="btn btn-sm btn-danger" (click)="eliminar(i)"
+                aria-label="Eliminar">X</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4" class="text-end"><strong>Total</strong></td>
+          <td colspan="2"><strong>${{ carrito.total().toFixed(2) }}</strong></td>
+        </tr>
+      </tfoot>
+    </table>
 
-<!-- ACCIONES del carrito -->
-@if (productos.length > 0) {
-<div class="acciones-carrito">
+    <div class="d-flex gap-2 justify-content-end">
+      <button type="button" class="btn btn-outline-danger" (click)="vaciar()">Vaciar carrito</button>
+      <a class="btn btn-success" routerLink="/compra">Finalizar compra</a>
+    </div>
 
-  <button
-    class="btn-vaciar"
-    (click)="vaciarCarrito()"
-  >
-    Vaciar carrito
-  </button>
-
-  <button
-    class="btn-comprar-ya"
-    (click)="comprarYa()"
-  >
-    Comprar ya
-  </button>
-
+  }
 </div>
-}

@@ -1,0 +1,87 @@
+<div class="container my-4">
+
+  <h1>🧾 Finalizar compra</h1>
+
+  @if (error()) {
+    <div class="alert alert-danger">{{ error() }}</div>
+  }
+
+  @if (cargando()) {
+    <p>Cargando...</p>
+  } @else if (carrito.items().length === 0) {
+    <div class="alert alert-secondary">
+      No hay productos para comprar. <a routerLink="/productos">Ir a la tienda</a>
+    </div>
+  } @else {
+
+    <div class="row g-4">
+
+      <!-- Datos de envío -->
+      <div class="col-12 col-lg-6">
+        <h4>Datos de envío</h4>
+        <form [formGroup]="form" (ngSubmit)="confirmar()" novalidate>
+
+          <div class="mb-3">
+            <label class="form-label" for="nombre">Nombre y apellido</label>
+            <input id="nombre" class="form-control" formControlName="nombre" autocomplete="name">
+            @if (form.controls.nombre.touched && form.controls.nombre.invalid) {
+              <small class="text-danger">Campo obligatorio.</small>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="direccion">Dirección</label>
+            <input id="direccion" class="form-control" formControlName="direccion" autocomplete="street-address">
+            @if (form.controls.direccion.touched && form.controls.direccion.invalid) {
+              <small class="text-danger">Campo obligatorio.</small>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="ciudad">Ciudad</label>
+            <input id="ciudad" class="form-control" formControlName="ciudad">
+            @if (form.controls.ciudad.touched && form.controls.ciudad.invalid) {
+              <small class="text-danger">Campo obligatorio.</small>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="telefono">Teléfono</label>
+            <input id="telefono" class="form-control" formControlName="telefono" autocomplete="tel">
+            @if (form.controls.telefono.touched && form.controls.telefono.invalid) {
+              <small class="text-danger">Ingresá un teléfono válido (solo números, +, - y espacios).</small>
+            }
+          </div>
+
+          <button type="submit" class="btn btn-success w-100" [disabled]="procesando()">
+            {{ procesando() ? 'Procesando compra...' : 'Confirmar compra' }}
+          </button>
+        </form>
+      </div>
+
+      <!-- Resumen -->
+      <div class="col-12 col-lg-6">
+        <h4>Resumen del pedido</h4>
+        <table class="table align-middle">
+          <tbody>
+            @for (i of carrito.items(); track i.id_producto) {
+              <tr>
+                <td><img [src]="urlImagen(i.imagen)" [alt]="i.nombre" width="40" height="40" class="rounded"></td>
+                <td>{{ i.nombre }} <small class="text-muted">x{{ i.cantidad }}</small></td>
+                <td class="text-end">${{ (i.cantidad * i.precio_unitario).toFixed(2) }}</td>
+              </tr>
+            }
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2"><strong>Total</strong></td>
+              <td class="text-end"><strong>${{ carrito.total().toFixed(2) }}</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+        <a routerLink="/carrito" class="btn btn-outline-light">← Volver al carrito</a>
+      </div>
+
+    </div>
+  }
+</div>

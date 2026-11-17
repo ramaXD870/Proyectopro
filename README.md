@@ -1,59 +1,42 @@
-# Proyectobr
+# Tienda Pokémon — Frontend Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+Frontend del proyecto final de E-Commerce (Angular 21, SSR, Bootstrap/Bootswatch). Consume la API REST en PHP (`api_proyecto`).
 
-## Development server
+## Cómo ejecutarlo
 
-To start a local development server, run:
+1. Dejar la API funcionando (ver `api_proyecto/README.md`): XAMPP con Apache y MySQL encendidos, base `tienda`, tabla `audit_logs` y un usuario admin.
+2. La URL de la API está en `src/app/config.ts` (`http://localhost/api_proyecto/public`).
+3. Instalar y levantar:
+   ```
+   npm install
+   npm start        # http://localhost:4200  (la API solo permite ese origen por CORS)
+   ```
 
-```bash
-ng serve
+## Estructura (`src/app`)
+
+```
+auth/            inicio-sesion/, registro/          formularios reactivos + manejo del token
+compartidos/     nav/, footer/, carrito/, favoritos/
+modelos/         producto.model.ts                  interfaces tipadas de la API
+paginas/         inicio, productos, ofertas, contacto, compra, compras, ticket, admin
+servicios/       auth, product, carrito, compra, favorito, ticket, audit (.service.ts)
+interceptores/   auth.interceptor.ts                agrega "Authorization: Bearer" y maneja el 401
+guard/           admin.guard.ts, auth.guard.ts      protegen rutas por sesión y por rol
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Plantillas con la sintaxis nueva `@if` / `@for` / `@empty`.
 
-## Code scaffolding
+## Decisiones
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Token JWT** en `localStorage`; el interceptor lo agrega a cada pedido a la API. Si la API responde `401` se cierra la sesión.
+- **Guards**: `authGuard` (carrito, favoritos, compra, compras, ticket) y `adminGuard` (panel admin). La API vuelve a validar el rol: los guards son solo UX.
+- **SSR**: solo `inicio` y `contacto` se prerenderizan; el resto se renderiza en el navegador porque depende de la API y del token.
+- **Estado**: carrito y favoritos viven en la base de datos; los servicios mantienen una copia en `signal`s para la pantalla.
+- **Datos de envío** (página `compra`): se validan en el formulario pero la base de la consigna no tiene dónde guardarlos.
 
-```bash
-ng generate component component-name
-```
+## Auditoría desde el frontend
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- `AuditService` junta eventos y los envía en lotes a `POST /auditoria` (no bloquea la interfaz y descarta si falla).
+- `app.ts` registra cada `NavigationEnd` (acción `NAVIGATION`) en un solo lugar.
+- `AuditErrorHandler` registra los errores no capturados (`CLIENT_ERROR`).
+- Panel admin → pestaña **Auditoría**: tabla con filtros por acción y nivel.

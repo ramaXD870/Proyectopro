@@ -1,0 +1,37 @@
+<div class="container my-4">
+
+  <h1>🧾 Mis compras</h1>
+
+  @if (error()) {
+    <div class="alert alert-danger">{{ error() }}</div>
+  }
+
+  @if (cargando()) {
+    <p>Cargando historial...</p>
+  } @else if (compras().length === 0) {
+    <div class="alert alert-secondary">
+      Todavía no hiciste ninguna compra. <a routerLink="/productos">Ver productos</a>
+    </div>
+  } @else {
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>Compra</th>
+          <th>Fecha</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (c of compras(); track c.id_compra) {
+          <tr>
+            <td>#{{ c.id_compra }}</td>
+            <td>{{ iso(c.fecha) | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>${{ c.total.toFixed(2) }}</td>
+            <td><a class="btn btn-sm btn-primary" [routerLink]="['/ticket', c.id_compra]">Ver ticket</a></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
